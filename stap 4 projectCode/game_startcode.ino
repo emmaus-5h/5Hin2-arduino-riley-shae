@@ -26,8 +26,7 @@ const int pinLedGroen   = 10; // pin van LED groen
 const int pinKnopBlauw = 6; // pin van knop blauw
 const int pinKnopGroen  = 4; // pin van knop groen
 
-int pinKnopBlauw = 0;
-int pinKnopGroen = 0;
+
 
 
 // variabelen voor de toestanden
@@ -36,6 +35,11 @@ const int SPEEL = 2; // speel het spel
 const int WIN   = 3; // laat zien wie de winnaar is
 int toestand = TELAF;
 unsigned long toestandStartTijd = 0;
+
+const int rood = 3;
+const int geel = 4;
+const int groen = 5;
+
 
 /*****************************************
    functies die je gebruikt maken
@@ -77,8 +81,7 @@ void setup() {
 
 void loop() {
   // lees sensorwaarden
-  pinKnopBlauw = digitalRead(pinKnopBlauw);
-  pinKnopGroen = digitalRead(pinKnopGroen);
+
   
   
   // bepaal toestand
@@ -101,7 +104,7 @@ void loop() {
   if (toestand == WIN) {
     winLoop();
     if (millis() - toestandStartTijd > 1000 &&  // 1 seconde voorbij en
-        knopBlauw == HIGH && knopGroen == HIGH) {       // beide knoppen ingedrukt
+        pinKnopBlauw == HIGH && pinKnopGroen == HIGH) {       // beide knoppen ingedrukt
       toestandStartTijd = millis();
       toestand = TELAF;
       Serial.println("Nieuwe toestand: TELAF");
